@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
     DndContext,
     closestCenter,
@@ -14,23 +15,10 @@ import {
 
 import { CSS } from "@dnd-kit/utilities";
 
-const weapons = [
-    { id: "splattershot", name: "Splattershot", icon: "🔫" },
-    { id: "roller", name: "Roller", icon: "🧹" },
-    { id: "blaster", name: "Blaster", icon: "💥" },
-    { id: "dualies", name: "Dualies", icon: "🎯" },
-    { id: "charger", name: "Charger", icon: "🏹" },
-    { id: "inkbrush", name: "Inkbrush", icon: "🖌️" },
-    { id: "slosher", name: "Slosher", icon: "🪣" },
-    { id: "stringer", name: "Stringer", icon: "⚡" },
-    { id: "splatling", name: "Splatling", icon: "🛡️" },
-    { id: "brella", name: "Brella", icon: "☂️" },
-    { id: "splatana", name: "Splatana", icon: "🗡️" },
-    { id: "filler", name: "Filler", icon: "⬜" },
-];
+import { weapons } from "../features/weapons/weaponList";
+import type { Weapon } from "../features/weapons/types";
 
-// Sortable item component
-function SortableItem({ id, icon, name }: { id: string; icon: string; name: string }) {
+function SortableItem({ id, icon, name }: Weapon) {
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
         useSortable({ id });
 
@@ -57,7 +45,7 @@ function SortableItem({ id, icon, name }: { id: string; icon: string; name: stri
 }
 
 export default function Builder() {
-    const [items, setItems] = useState(weapons.map((w) => w.id));
+    const [items, setItems] = useState(weapons.map((w: Weapon) => w.id));
 
     function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;
