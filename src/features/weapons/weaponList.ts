@@ -12,5 +12,5 @@ export const weapons: Weapon[] = [
     { id: "splatling", name: "Splatling", icon: "🛡️" },
     { id: "brella", name: "Brella", icon: "☂️" },
     { id: "splatana", name: "Splatana", icon: "🗡️" },
-    { id: "filler", name: "Filler", icon: "⬜" },
+    { id: "filler", name: "Filler", icon: "😄" },
 ];

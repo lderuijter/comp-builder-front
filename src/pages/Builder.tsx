@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 import {
     DndContext,
@@ -36,16 +36,23 @@ function SortableItem({ id, icon, name }: Weapon) {
             style={style}
             {...attributes}
             {...listeners}
-            className="p-3 border rounded bg-white flex items-center gap-3 cursor-pointer select-none w-full"
+            className="p-4 border rounded bg-white flex items-center gap-2 cursor-pointer select-none w-full touch-none"
         >
             <span className="text-2xl">{icon}</span>
-            <span>{name}</span>
+            <span className="hidden sm:inline">{name}</span>
         </div>
     );
 }
 
 export default function Builder() {
-    const [items, setItems] = useState(weapons.map((w: Weapon) => w.id));
+    const [items, setItems] = useState<string[]>(() => {
+        const saved = localStorage.getItem("weaponOrder");
+        return saved ? JSON.parse(saved) : weapons.map(w => w.id);
+    });
+
+    useEffect(() => {
+        localStorage.setItem("weaponOrder", JSON.stringify(items));
+    }, [items]);
 
     function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;
@@ -67,7 +74,7 @@ export default function Builder() {
             <div className="flex-1 flex justify-center items-center">
                 <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                     <SortableContext items={items} strategy={rectSortingStrategy}>
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
                             {items.map((id) => {
                                 const weapon = weapons.find((w) => w.id === id)!;
                                 return <SortableItem key={id} {...weapon} />;
