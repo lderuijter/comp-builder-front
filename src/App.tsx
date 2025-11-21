@@ -1,12 +1,5 @@
-import './assets/css/App.css'
+import Builder from "./pages/Builder";
 
-function App() {
-
-  return (
-    <>
-      <h1>Comp Builder</h1>
-    </>
-  )
+export default function App(){
+    return <Builder />;
 }
-
-export default App
