@@ -69,7 +69,7 @@ export default function Builder() {
     }
 
     return (
-        <div className="p-6 overflow-hidden h-screen bg-gray-900 flex flex-col">
+        <div className="p-6 overflow-hidden min-h-screen bg-gray-900 flex flex-col">
             <h1 className="text-white font-bold text-3xl mb-4 text-center">Weapon Order Builder</h1>
             <div className="flex-1 flex justify-center items-center">
                 <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
